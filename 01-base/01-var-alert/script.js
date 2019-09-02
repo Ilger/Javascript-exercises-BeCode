@@ -12,5 +12,6 @@
 (function() {
 
     // your code here
-
+let message = "done";
+alert(message);
 })();
