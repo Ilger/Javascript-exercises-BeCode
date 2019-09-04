@@ -12,5 +12,8 @@
 (function() {
 
     // your code here
+let name = window.prompt('your name please')
+window.alert(`Hello ${name}`)
+console.log(name);
 
 })();
