@@ -11,6 +11,9 @@
 
 (function() {
 
-  // your code here
+const wantsCake = window.prompt('Do you want cake? (say "yes")')
+const answer = wantsCake == 'yes' ? 'Please enjoy' : 'More cake for me then :p !'
+
+window.alert(answer)
 
 })();
