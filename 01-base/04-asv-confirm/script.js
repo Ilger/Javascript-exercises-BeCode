@@ -10,7 +10,17 @@
 // You will have time to focus on it later.
 
 (function() {
-
-    // your code here
-
+    // const data = dataCollection()
+    const data = { 'age': age , 'gender': gender , 'town': town }
+    // function dataCollection() {
+        
+    //     const age = window.prompt('Your age')
+    //     const gender = window.prompt('Your gender')
+    //     const town = window.prompt('Your town you live in')
+    //     return { 'age': age , 'gender': gender , 'town': town }
+    // }
+    // console.log(data.length);
+    
+    window.alert(`${strify(data)}`)
 })();
+
