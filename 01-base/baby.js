@@ -1,5 +1,5 @@
 
-document.getElementById('root').innerHTML = bowlingScore('90 27 X 61 72 5/ 51 9/ X 53');
+document.getElementById('root').innerHTML = bowlingScore('X X X X X X X X X XXX');
 
 
 function bowlingScore(frames) {
@@ -17,13 +17,7 @@ function bowlingScore(frames) {
                     : parseInt(frameArr[(i + 1)][0])
             } else if (isStrike(frame)) { // strike = +10 +next two roles
                 score += 10
-                score = score + (whenStrikeAndNextTwoRollsAreStrikes(frameArr, i)) // if next two rolles are strikes
-                    ? 20
-                    : (whenStrikeAndNextRollIsStrikeButSecondNot(frameArr, i)) // if next role is strike but second isent
-                        ? 10 + parseInt(frameArr[(i + 1)][0])
-                        : (whenStrikeAndAndNextTwoIsSpare(frameArr, i)) // if seconde role is a spare
-                            ? 10
-                            : parseInt(frameArr[(i + 1)][0]) + parseInt(frameArr[(i + 1)][1]) //if next two roles are just nuberscore
+                score = score + strikeCheck(frameArr, i)
             } else {
                 score += parseInt(frame[0])
                 score += parseInt(frame[1])
@@ -46,7 +40,7 @@ function bowlingScore(frames) {
             }
         } else { // calc frame 9
             console.log('in loop 9');
-            
+
             if (frame.length === 3) {
                 if (isSpare(frame)) { //spare case
                     score += 10
@@ -112,17 +106,28 @@ function whenStrikeAndAndNextTwoIsSpare(frameArr, index) {
             : false
     )
 }
+function strikeCheck(frameArr, i) {
+    return (
+    (whenStrikeAndNextTwoRollsAreStrikes(frameArr, i)) // if next two rolles are strikes
+        ? 20
+        : (whenStrikeAndNextRollIsStrikeButSecondNot(frameArr, i)) // if next role is strike but second isent
+            ? 10 + parseInt(frameArr[(i + 1)][0])
+            : (whenStrikeAndAndNextTwoIsSpare(frameArr, i)) // if seconde role is a spare
+                ? 10
+                : parseInt(frameArr[(i + 1)][0]) + parseInt(frameArr[(i + 1)][1]) //if next two roles are just nuberscore
+)
+}
 function beforeLastIsStrike(frameArr, index) {
     const i = index;
     const nextFrame = (index + 1);
-    const checkScore =(((frameArr[nextFrame][0] === 'X' && frameArr[nextFrame][1] === 'X')) // if next two rolles are strikes
-    ? 20
-    : (whenStrikeAndNextRollIsStrikeButSecondNot(frameArr, i)) // if next role is strike but second isent
-        ? 10 + parseInt(frameArr[nextFrame][1])
-        : (whenStrikeAndAndNextTwoIsSpare(frameArr, i)) // if seconde role is a spare
-            ? 10
-            : parseInt(frameArr[nextFrame][0]) + parseInt(frameArr[nextFrame][1])
-            ) //if next two roles are just nuberscore
+    const checkScore = (((frameArr[nextFrame][0] === 'X' && frameArr[nextFrame][1] === 'X')) // if next two rolles are strikes
+        ? 20
+        : (whenStrikeAndNextRollIsStrikeButSecondNot(frameArr, i)) // if next role is strike but second isent
+            ? 10 + parseInt(frameArr[nextFrame][1])
+            : (whenStrikeAndAndNextTwoIsSpare(frameArr, i)) // if seconde role is a spare
+                ? 10
+                : parseInt(frameArr[nextFrame][0]) + parseInt(frameArr[nextFrame][1])
+    ) //if next two roles are just nuberscore
     console.log(checkScore + 'beforelast score');
     return checkScore
 }
